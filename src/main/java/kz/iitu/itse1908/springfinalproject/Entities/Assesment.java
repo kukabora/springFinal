@@ -14,8 +14,8 @@ public class Assesment {
     @JoinColumn(name = "testid", nullable = false)
     private Test testid;
 
-    @Column(name = "testreult")
-    private Integer testreult;
+    @Column(name = "testresult")
+    private Integer testresult;
 
     @Column(name = "assesmentgrade", nullable = false)
     private Integer assesmentgrade;
@@ -43,12 +43,12 @@ public class Assesment {
         this.testid = testid;
     }
 
-    public Integer getTestreult() {
-        return testreult;
+    public Integer getTestresult() {
+        return testresult;
     }
 
     public void setTestreult(Integer testreult) {
-        this.testreult = testreult;
+        this.testresult = testreult;
     }
 
     public Integer getAssesmentgrade() {

@@ -23,6 +23,9 @@ public class Task {
     @Column(name = "tasktype", nullable = false)
     private String tasktype;
 
+    @Column(name = "taskDescription", nullable = false)
+    private String taskDescription;
+
     @OneToMany(mappedBy = "taskid")
     private Set<TaskGroup> taskGroups = new LinkedHashSet<>();
 
@@ -66,4 +69,12 @@ public class Task {
         this.taskGroups = taskGroups;
     }
 
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
 }
