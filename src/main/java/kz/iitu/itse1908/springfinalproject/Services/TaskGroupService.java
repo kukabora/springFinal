@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TaskGroupService {
 
-    @Autowired
+    final
     TaskGroupRepository taskGroupRepository;
+
+    public TaskGroupService(TaskGroupRepository taskGroupRepository) {
+        this.taskGroupRepository = taskGroupRepository;
+    }
 
     public void insert(TaskGroup taskGroup){
         taskGroupRepository.save(taskGroup);

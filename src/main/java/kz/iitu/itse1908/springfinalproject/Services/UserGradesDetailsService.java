@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserGradesDetailsService {
 
-    @Autowired
+    final
     UsersgradedetailRepository usersgradedetailRepository;
+
+    public UserGradesDetailsService(UsersgradedetailRepository usersgradedetailRepository) {
+        this.usersgradedetailRepository = usersgradedetailRepository;
+    }
 
     public void insert(Usersgradedetail usersgradedetail){
         usersgradedetailRepository.save(usersgradedetail);

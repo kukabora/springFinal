@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class RequestLogService {
 
-    @Autowired
+    final
     RequestsLogRepository requestsLogRepository;
+
+    public RequestLogService(RequestsLogRepository requestsLogRepository) {
+        this.requestsLogRepository = requestsLogRepository;
+    }
 
     public void insert(RequestsLog requestsLog){
         requestsLogRepository.save(requestsLog);

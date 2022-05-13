@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AssessmentService {
 
-    @Autowired
+    final
     AssesmentRepository assesmentRepository;
+
+    public AssessmentService(AssesmentRepository assesmentRepository) {
+        this.assesmentRepository = assesmentRepository;
+    }
 
     public void insertNewAssesment(Assesment assessment){
         assesmentRepository.save(assessment);

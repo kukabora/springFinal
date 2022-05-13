@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class NotificationService {
 
-    @Autowired
+    final
     NotificationRepository notificationRepository;
+
+    public NotificationService(NotificationRepository notificationRepository) {
+        this.notificationRepository = notificationRepository;
+    }
 
     public void insert(Notification notification){
         notificationRepository.save(notification);

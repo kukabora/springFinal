@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestQuestionService {
 
-    @Autowired
+    final
     TestquestionRepository testquestionRepository;
+
+    public TestQuestionService(TestquestionRepository testquestionRepository) {
+        this.testquestionRepository = testquestionRepository;
+    }
 
     public void insert(Testquestion testquestion){
         testquestionRepository.save(testquestion);

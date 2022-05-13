@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class GroupService {
 
-    @Autowired
+    final
     GroupRepository groupRepository;
+
+    public GroupService(GroupRepository groupRepository) {
+        this.groupRepository = groupRepository;
+    }
 
     public void insertNewGroup(Group group){
         groupRepository.save(group);
@@ -30,4 +34,6 @@ public class GroupService {
     }
 
     public Group findGroupByName(String name) { return groupRepository.findGroupByName(name); }
+
+    public Group findGroupById(int id) { return groupRepository.findGroupById(id); }
 }

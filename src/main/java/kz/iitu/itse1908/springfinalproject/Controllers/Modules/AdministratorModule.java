@@ -5,6 +5,9 @@ import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Repositories.GroupRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.RoleRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.UserRepository;
+import kz.iitu.itse1908.springfinalproject.Services.GroupService;
+import kz.iitu.itse1908.springfinalproject.Services.RoleService;
+import kz.iitu.itse1908.springfinalproject.Services.UserService;
 import kz.iitu.itse1908.springfinalproject.Utils.CsvUtils;
 import kz.iitu.itse1908.springfinalproject.Utils.FileExtensionUtil;
 import kz.iitu.itse1908.springfinalproject.Utils.GetCurrentDateUtil;
@@ -27,17 +30,24 @@ import java.util.List;
 @RequestMapping(value = "/adminModule")
 public class AdministratorModule {
 
-    @Autowired
-    GroupRepository groupRepository;
+    final
+    GroupService groupService;
 
-    @Autowired
-    RoleRepository roleRepository;
+    final
+    RoleService roleService;
 
-    @Autowired
-    UserRepository userRepository;
+    final
+    UserService userService;
 
-    @Autowired
+    final
     PasswordEncoder passwordEncoder;
+
+    public AdministratorModule(GroupService groupService, RoleService roleService, UserService userService, PasswordEncoder passwordEncoder) {
+        this.groupService = groupService;
+        this.roleService = roleService;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/getNewStudentsTemplate")
     public void downloadCsv(HttpServletResponse response) throws IOException {
@@ -68,11 +78,11 @@ public class AdministratorModule {
             newUser.setLname(currentUserInfo[1]);
             newUser.setEmail(currentUserInfo[2]);
             newUser.setPassword(passwordEncoder.encode(currentUserInfo[3]));
-            newUser.setRoleid(roleRepository.findRoleById(Integer.valueOf(currentUserInfo[4])));
-            newUser.setGroupid(groupRepository.findGroupById(Integer.valueOf(currentUserInfo[5])));
+            newUser.setRoleid(roleService.getRoleById(Integer.valueOf(currentUserInfo[4])));
+            newUser.setGroupid(groupService.findGroupById(Integer.valueOf(currentUserInfo[5])));
             newUsers.add(newUser);
         }
-        userRepository.saveAll(newUsers);
+        userService.saveAll(newUsers);
         return "Users have been successfully added";
     }
 
