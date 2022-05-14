@@ -1,5 +1,7 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,11 +14,11 @@ public class Task {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "graderid", nullable = false)
     private User graderid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "testid")
     private Test testid;
 
@@ -26,7 +28,7 @@ public class Task {
     @Column(name = "taskDescription", nullable = false)
     private String taskDescription;
 
-    @OneToMany(mappedBy = "taskid")
+    @OneToMany(mappedBy = "taskid", fetch = FetchType.EAGER)
     private Set<TaskGroup> taskGroups = new LinkedHashSet<>();
 
     public Integer getId() {
@@ -37,8 +39,8 @@ public class Task {
         this.id = id;
     }
 
-    public User getGraderid() {
-        return graderid;
+    public Integer getGraderid() {
+        return graderid.getId();
     }
 
     public void setGraderid(User graderid) {

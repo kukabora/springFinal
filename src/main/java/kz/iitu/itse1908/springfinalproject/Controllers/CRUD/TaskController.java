@@ -1,7 +1,9 @@
 package kz.iitu.itse1908.springfinalproject.Controllers.CRUD;
 
 
+import kz.iitu.itse1908.springfinalproject.Entities.Task;
 import kz.iitu.itse1908.springfinalproject.Entities.User;
+import kz.iitu.itse1908.springfinalproject.Repositories.TaskRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,20 +17,20 @@ import java.util.List;
 
 @RestController
 @EnableWebMvc
-@RequestMapping(value = "/crud/users")
-public class UserController {
+@RequestMapping(value = "/crud/tasks")
+public class TaskController {
 
-    UserRepository repository;
+    TaskRepository repository;
     @Autowired
-    public void UserController(UserRepository repository){
+    public void TaskController(TaskRepository repository){
         this.repository = repository;
     }
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<User> getAllUsers(){
-        List<User> users = (List<User>) repository.findAll();
-        return users;
+    public List<Task> getAllTasks(){
+        List<Task> tasks = (List<Task>) repository.findAll();
+        return tasks;
     }
 
 }

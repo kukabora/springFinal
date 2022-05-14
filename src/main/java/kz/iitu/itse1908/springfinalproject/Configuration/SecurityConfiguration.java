@@ -1,5 +1,6 @@
-package kz.iitu.itse1908.springfinalproject.Security;
+package kz.iitu.itse1908.springfinalproject.Configuration;
 
+import kz.iitu.itse1908.springfinalproject.Security.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
@@ -26,7 +27,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/users/*").authenticated()
+                .antMatchers("/adminModule/*", "/crud/*").hasRole("ADMIN")
+                .antMatchers("/staffModule/*").hasAnyRole("ADMIN", "STAFF")
+                .antMatchers("/userModule/*").hasAnyRole("ADMIN", "STAFF", "STUDENT")
                 .antMatchers("/register", "/auth").permitAll()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

@@ -1,11 +1,14 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "roles")
+@JsonIgnoreProperties("users")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

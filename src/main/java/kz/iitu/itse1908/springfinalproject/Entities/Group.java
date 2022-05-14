@@ -1,11 +1,18 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "groups")
+@JsonIgnoreProperties({"users", "taskGroups"})
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +23,11 @@ public class Group {
     private String name;
 
     @OneToMany(mappedBy = "groupid")
+//    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<TaskGroup> taskGroups = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "groupid")
+//    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<User> users = new LinkedHashSet<>();
 
     public Integer getId() {

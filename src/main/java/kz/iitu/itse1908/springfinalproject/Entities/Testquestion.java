@@ -37,8 +37,8 @@ public class Testquestion {
         this.id = id;
     }
 
-    public Test getTestid() {
-        return testid;
+    public Integer getTestid() {
+        return testid.getId();
     }
 
     public void setTestid(Test testid) {

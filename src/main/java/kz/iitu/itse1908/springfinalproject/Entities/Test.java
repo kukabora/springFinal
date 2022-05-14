@@ -1,18 +1,21 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "tests")
+@JsonIgnoreProperties({"testquestions", "assesments", "tasks"})
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "creatorid", nullable = false)
     private User creatorid;
 
@@ -33,8 +36,8 @@ public class Test {
         this.id = id;
     }
 
-    public User getCreatorid() {
-        return creatorid;
+    public Integer getCreatorid() {
+        return creatorid.getId();
     }
 
     public void setCreatorid(User creatorid) {

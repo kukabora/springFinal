@@ -1,5 +1,6 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties({"tasks", "tests", "assesments", "createdNotifications", "notifications", "usersgradedetails"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,7 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -26,16 +28,16 @@ public class TaskGroup {
         this.id = id;
     }
 
-    public Group getGroupid() {
-        return groupid;
+    public Integer getGroupid() {
+        return groupid.getId();
     }
 
     public void setGroupid(Group groupid) {
         this.groupid = groupid;
     }
 
-    public Task getTaskid() {
-        return taskid;
+    public Integer getTaskid() {
+        return taskid.getId();
     }
 
     public void setTaskid(Task taskid) {
