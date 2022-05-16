@@ -2,6 +2,7 @@ package kz.iitu.itse1908.springfinalproject.Configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.*;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -35,7 +36,10 @@ public class DatasourceConfiguration {
         HikariConfig config = new HikariConfig(props);
         HikariDataSource dataSource = new HikariDataSource(config);
 
-        return dataSource;
+        return ProxyDataSourceBuilder.create(dataSource)
+                .name("Batch-Insert-Logger")
+                .asJson().countQuery().logQueryToSysOut().build();
+
     }
 
     private Properties hibernateProperties() {
@@ -49,7 +53,6 @@ public class DatasourceConfiguration {
         hibernateProp.put("hibernate.jdbc.batch_size", 10);
         hibernateProp.put("hibernate.jdbc.fetch_size", 50);
         hibernateProp.put("spring.jpa.properties.hibernate.enable_lazy_load_no_trans", true);
-
         return hibernateProp;
     }
 

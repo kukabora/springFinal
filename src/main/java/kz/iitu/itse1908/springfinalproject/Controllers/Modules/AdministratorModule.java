@@ -66,9 +66,10 @@ public class AdministratorModule {
             newUser.setPassword(passwordEncoder.encode(currentUserInfo[3]));
             newUser.setRoleid(roleRepository.findRoleById(Integer.valueOf(currentUserInfo[4])));
             newUser.setGroupid(groupRepository.findGroupById(Integer.valueOf(currentUserInfo[5])));
+            userRepository.save(newUser);
             newUsers.add(newUser);
         }
-        System.out.println(newUsers);
+        userRepository.saveAll(newUsers);
         return "Users have been successfully added";
     }
 
