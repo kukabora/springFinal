@@ -14,7 +14,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,9 @@ public class AdministratorModule {
     RoleRepository roleRepository;
 
     @Autowired
+    EntityManager entityManager;
+
+    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -43,6 +49,7 @@ public class AdministratorModule {
         CsvUtils.downloadCsv(response.getWriter()) ;
     }
 
+    @Transactional
     @RequestMapping(value = "/uploadNewStudents", method = RequestMethod.POST)
     public String uploadNewStudents(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
         String extension = FileExtensionUtil.getExtensionByStringHandling(file.getOriginalFilename()).get();
@@ -56,7 +63,6 @@ public class AdministratorModule {
             return e.getMessage();
         }
         List<String[]> userDetails = CsvUtils.readNewStudents("temp/" + "students_import_for_"+currentDate+"."+extension);
-        List<User> newUsers = new ArrayList<User>();
         for (int i = 0;i<userDetails.size();i++){
             String[] currentUserInfo = userDetails.get(i);
             User newUser = new User();
@@ -66,10 +72,9 @@ public class AdministratorModule {
             newUser.setPassword(passwordEncoder.encode(currentUserInfo[3]));
             newUser.setRoleid(roleRepository.findRoleById(Integer.valueOf(currentUserInfo[4])));
             newUser.setGroupid(groupRepository.findGroupById(Integer.valueOf(currentUserInfo[5])));
-            userRepository.save(newUser);
-            newUsers.add(newUser);
+//            userRepository.save(newUser);
+            entityManager.persist(newUser);
         }
-        userRepository.saveAll(newUsers);
         return "Users have been successfully added";
     }
 
