@@ -1,4 +1,4 @@
-package kz.iitu.itse1908.springfinalproject.Configuration.AOPConfiguration;
+package kz.iitu.itse1908.springfinalproject.AOPConfiguration;
 
 import kz.iitu.itse1908.springfinalproject.Entities.RequestsLog;
 import kz.iitu.itse1908.springfinalproject.Repositories.RequestsLogRepository;
