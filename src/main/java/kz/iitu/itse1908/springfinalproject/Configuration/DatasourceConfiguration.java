@@ -45,14 +45,15 @@ public class DatasourceConfiguration {
     private Properties hibernateProperties() {
         Properties hibernateProp = new Properties();
         hibernateProp.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        hibernateProp.put("hibernate.format_sql", true);
-        hibernateProp.put("hibernate.use_sql_comments", true);
-        hibernateProp.put("hibernate.show_sql", true);
         hibernateProp.put("org.hibernate.envers.audit_table_suffix", "_AUDIT_LOG");
         hibernateProp.put("hibernate.max_fetch_depth", 3);
         hibernateProp.put("hibernate.jdbc.batch_size", 10);
         hibernateProp.put("hibernate.jdbc.fetch_size", 50);
         hibernateProp.put("spring.jpa.properties.hibernate.enable_lazy_load_no_trans", true);
+        hibernateProp.put("spring.jpa.properties.hibernate.order_inserts", true);
+        hibernateProp.put("hibernate.cache.use_second_level_cache", false);
+        hibernateProp.put("hibernate.id.new_generator_mappings", true);
+        hibernateProp.put("spring.jpa.hibernate.ddl-auto", "create");
         return hibernateProp;
     }
 

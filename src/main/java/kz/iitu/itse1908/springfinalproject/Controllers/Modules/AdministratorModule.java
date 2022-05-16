@@ -34,9 +34,6 @@ public class AdministratorModule {
     RoleRepository roleRepository;
 
     @Autowired
-    EntityManager entityManager;
-
-    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -63,6 +60,7 @@ public class AdministratorModule {
             return e.getMessage();
         }
         List<String[]> userDetails = CsvUtils.readNewStudents("temp/" + "students_import_for_"+currentDate+"."+extension);
+        List<User> newUsers = new ArrayList<User>();
         for (int i = 0;i<userDetails.size();i++){
             String[] currentUserInfo = userDetails.get(i);
             User newUser = new User();
@@ -72,9 +70,9 @@ public class AdministratorModule {
             newUser.setPassword(passwordEncoder.encode(currentUserInfo[3]));
             newUser.setRoleid(roleRepository.findRoleById(Integer.valueOf(currentUserInfo[4])));
             newUser.setGroupid(groupRepository.findGroupById(Integer.valueOf(currentUserInfo[5])));
-//            userRepository.save(newUser);
-            entityManager.persist(newUser);
+            newUsers.add(newUser);
         }
+        userRepository.saveAll(newUsers);
         return "Users have been successfully added";
     }
 
