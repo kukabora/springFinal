@@ -5,6 +5,7 @@ import kz.iitu.itse1908.springfinalproject.Entities.Task;
 import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Repositories.TaskRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.UserRepository;
+import kz.iitu.itse1908.springfinalproject.Services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,16 +21,18 @@ import java.util.List;
 @RequestMapping(value = "/crud/tasks")
 public class TaskController {
 
-    TaskRepository repository;
-    @Autowired
-    public void TaskController(TaskRepository repository){
-        this.repository = repository;
+    final
+    TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
+
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Task> getAllTasks(){
-        List<Task> tasks = (List<Task>) repository.findAll();
+        List<Task> tasks = (List<Task>) taskService.getAll();
         return tasks;
     }
 

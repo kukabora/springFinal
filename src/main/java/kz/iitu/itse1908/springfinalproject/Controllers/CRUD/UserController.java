@@ -3,6 +3,7 @@ package kz.iitu.itse1908.springfinalproject.Controllers.CRUD;
 
 import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Repositories.UserRepository;
+import kz.iitu.itse1908.springfinalproject.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +19,17 @@ import java.util.List;
 @RequestMapping(value = "/crud/users")
 public class UserController {
 
-    UserRepository repository;
-    @Autowired
-    public void UserController(UserRepository repository){
-        this.repository = repository;
+    final
+    UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<User> getAllUsers(){
-        List<User> users = (List<User>) repository.findAll();
+        List<User> users = (List<User>) userService.getAll();
         return users;
     }
 

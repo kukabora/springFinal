@@ -5,6 +5,7 @@ import kz.iitu.itse1908.springfinalproject.Entities.Task;
 import kz.iitu.itse1908.springfinalproject.Entities.Test;
 import kz.iitu.itse1908.springfinalproject.Repositories.TaskRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.TestRepository;
+import kz.iitu.itse1908.springfinalproject.Services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,16 +21,18 @@ import java.util.List;
 @RequestMapping(value = "/crud/tests")
 public class TestController {
 
-    TestRepository repository;
-    @Autowired
-    public void TestController(TestRepository repository){
-        this.repository = repository;
+    final
+    TestService testService;
+
+    public TestController(TestService testService) {
+        this.testService = testService;
     }
+
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Test> getAllTests(){
-        List<Test> tests = (List<Test>) repository.findAll();
+        List<Test> tests = (List<Test>) testService.getAll();
         return tests;
     }
 

@@ -3,7 +3,9 @@ package kz.iitu.itse1908.springfinalproject.Services;
 import kz.iitu.itse1908.springfinalproject.Entities.Assesment;
 import kz.iitu.itse1908.springfinalproject.Repositories.AssesmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AssessmentService {
 
     @Autowired
@@ -24,7 +26,5 @@ public class AssessmentService {
     public void saveAll(Iterable<Assesment> assesments){
         assesmentRepository.saveAll(assesments);
     }
-
-
 
 }

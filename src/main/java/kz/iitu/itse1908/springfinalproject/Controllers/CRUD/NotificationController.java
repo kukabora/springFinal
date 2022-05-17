@@ -5,6 +5,7 @@ import kz.iitu.itse1908.springfinalproject.Entities.Notification;
 import kz.iitu.itse1908.springfinalproject.Entities.Role;
 import kz.iitu.itse1908.springfinalproject.Repositories.NotificationRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.RoleRepository;
+import kz.iitu.itse1908.springfinalproject.Services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,17 +21,17 @@ import java.util.List;
 @RequestMapping(value = "/crud/notifications")
 public class NotificationController {
 
-    NotificationRepository repository;
+    final
+    NotificationService notificationService;
 
-    @Autowired
-    public void NotificationController(NotificationRepository repository){
-        this.repository = repository;
+    public NotificationController(NotificationService notificationService) {
+        this.notificationService = notificationService;
     }
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<Notification> getAllNotifications(){
-        return (List<Notification>) repository.findAll();
+        return (List<Notification>) notificationService.getAll();
     }
 
 }

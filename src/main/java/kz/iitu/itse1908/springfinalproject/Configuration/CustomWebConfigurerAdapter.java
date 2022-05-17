@@ -14,14 +14,12 @@ import java.util.List;
 @EnableWebMvc
 public class CustomWebConfigurerAdapter extends WebMvcConfigurerAdapter {
 
-
     public MappingJackson2HttpMessageConverter jacksonMessageConverter(){
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new Hibernate5Module());
         messageConverter.setObjectMapper(mapper);
         return messageConverter;
-
     }
 
     @Override

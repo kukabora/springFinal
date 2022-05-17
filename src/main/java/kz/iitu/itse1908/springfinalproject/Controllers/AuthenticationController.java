@@ -8,6 +8,8 @@ import kz.iitu.itse1908.springfinalproject.Security.Requests.AuthRequest;
 import kz.iitu.itse1908.springfinalproject.Security.Requests.RegistrationRequest;
 import kz.iitu.itse1908.springfinalproject.Security.Responses.AuthResponse;
 import kz.iitu.itse1908.springfinalproject.Security.UserAuthenticationService;
+import kz.iitu.itse1908.springfinalproject.Services.GroupService;
+import kz.iitu.itse1908.springfinalproject.Services.RoleService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,25 +24,28 @@ import java.security.MessageDigest;
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
-    @Autowired
-    private UserAuthenticationService userService;
+    private final UserAuthenticationService userService;
 
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleService roleService;
 
-    @Autowired
-    private GroupRepository groupRepository;
+    private final GroupService groupService;
 
-    @Autowired
-    private JwtProvider jwtProvider;
+    private final JwtProvider jwtProvider;
+
+    public AuthenticationController(UserAuthenticationService userService, RoleService roleService, GroupService groupService, JwtProvider jwtProvider) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.groupService = groupService;
+        this.jwtProvider = jwtProvider;
+    }
 
     @PostMapping("/register")
     public String registerUser(@RequestBody @Valid RegistrationRequest registrationRequest) {
         User u = new User();
         u.setPassword(registrationRequest.getPassword());
         u.setEmail(registrationRequest.getLogin());
-        u.setRoleid(roleRepository.findRoleByName("USER"));
-        u.setGroupid(groupRepository.findGroupByName("UNSORTED"));
+        u.setRoleid(roleService.getRoleByName("USER"));
+        u.setGroupid(groupService.findGroupByName("UNSORTED"));
         u.setFname(registrationRequest.getFname());
         u.setLname(registrationRequest.getLname());
         userService.saveUser(u);

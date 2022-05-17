@@ -5,6 +5,7 @@ import kz.iitu.itse1908.springfinalproject.Entities.Assesment;
 import kz.iitu.itse1908.springfinalproject.Entities.Group;
 import kz.iitu.itse1908.springfinalproject.Repositories.AssesmentRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.GroupRepository;
+import kz.iitu.itse1908.springfinalproject.Services.AssessmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,15 +22,18 @@ import java.util.List;
 @RequestMapping(value = "/crud/assessments")
 public class AssessmentController {
 
-    @Autowired
-    private AssesmentRepository repository;
+    private final AssessmentService assessmentService;
+
+    public AssessmentController(AssessmentService assessmentService) {
+        this.assessmentService = assessmentService;
+    }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional
     List<Assesment> home() {
-        return (List<Assesment>) repository.findAll();
+        return (List<Assesment>) assessmentService.getAll();
     }
 
 }

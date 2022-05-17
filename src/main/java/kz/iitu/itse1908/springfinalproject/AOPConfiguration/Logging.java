@@ -1,11 +1,12 @@
 package kz.iitu.itse1908.springfinalproject.AOPConfiguration;
 
 import kz.iitu.itse1908.springfinalproject.Entities.RequestsLog;
-import kz.iitu.itse1908.springfinalproject.Repositories.RequestsLogRepository;
+import kz.iitu.itse1908.springfinalproject.Services.RequestLogService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,15 +20,15 @@ import java.time.ZoneId;
 @Aspect
 public class Logging {
 
-    final
-    RequestsLogRepository repository;
+    private final RequestLogService requestLogService;
 
     RequestsLog catchedRequest;
     private static final Logger logger = LoggerFactory.getLogger(Logging.class);
 
-    public Logging(RequestsLogRepository repository) {
-        this.repository = repository;
+    public Logging(RequestLogService requestLogService) {
+        this.requestLogService = requestLogService;
     }
+
 
     @Pointcut("execution(* kz.iitu.itse1908.springfinalproject.Controllers.CRUD.*.*(..))")
     public void pointCut(){ }
@@ -57,7 +58,7 @@ public class Logging {
         Instant instant = Instant.ofEpochMilli(millisSinceEpoch);
         OffsetDateTime dt = OffsetDateTime.ofInstant(instant, ZoneId.of("UTC"));
         catchedRequest.setCreatedat(dt);
-        repository.save(catchedRequest);
+        requestLogService.insert(catchedRequest);
     }
 
 //    @Around("pointCut()")

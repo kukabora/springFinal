@@ -27,11 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/auth/**").permitAll()
                 .antMatchers("/userModule/*").hasAnyAuthority("ADMIN", "STAFF", "STUDENT")
                 .antMatchers("/staffModule/*").hasAnyAuthority("ADMIN", "STAFF")
                 .antMatchers("/adminModule/*").hasAuthority("ADMIN")
                 .antMatchers("/crud/**").hasAuthority("ADMIN")
-                .antMatchers("/auth/**").permitAll()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }

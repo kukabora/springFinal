@@ -4,6 +4,8 @@ import kz.iitu.itse1908.springfinalproject.Entities.Role;
 import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Repositories.RoleRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.UserRepository;
+import kz.iitu.itse1908.springfinalproject.Services.RoleService;
+import kz.iitu.itse1908.springfinalproject.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,24 +13,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserAuthenticationService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
 
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleService roleService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserAuthenticationService(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public User saveUser(User user) {
-        Role userRole = roleRepository.findRoleByName("STUDENT");
+        Role userRole = roleService.getRoleByName("STUDENT");
         user.setRoleid(userRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return userService.insert(user);
     }
 
     public User findByLogin(String login) {
-        return userRepository.findUserByEmail(login);
+        return userService.findUserByEmail(login);
     }
 
     public User findByLoginAndPassword(String login, String password) {
