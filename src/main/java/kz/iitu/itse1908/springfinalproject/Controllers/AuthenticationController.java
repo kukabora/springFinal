@@ -10,16 +10,19 @@ import kz.iitu.itse1908.springfinalproject.Security.Responses.AuthResponse;
 import kz.iitu.itse1908.springfinalproject.Security.UserAuthenticationService;
 import kz.iitu.itse1908.springfinalproject.Services.GroupService;
 import kz.iitu.itse1908.springfinalproject.Services.RoleService;
+import kz.iitu.itse1908.springfinalproject.UserInfoResponse;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+
+import static kz.iitu.itse1908.springfinalproject.Security.JwtFilter.AUTHORIZATION;
 
 @RestController
 @RequestMapping("/auth")
@@ -58,5 +61,15 @@ public class AuthenticationController {
         User user = userService.findByLoginAndPassword(request.getLogin(), request.getPassword());
         String token = jwtProvider.generateToken(user.getEmail());
         return new AuthResponse(token);
+    }
+
+    @GetMapping("/checkUser")
+    @Cacheable(value="customUserCache", key="#userRequest.getHeader(\"Authorization\")")
+    public String checkUserInformation(HttpServletRequest userRequest) {
+        String token = userRequest.getHeader(AUTHORIZATION).substring(7);
+        String userLogin = jwtProvider.getLoginFromToken(token);
+        User user = userService.findByLogin(userLogin);
+        UserInfoResponse userDetailedDescription = new UserInfoResponse(user, user.getGroupid(), user.getRoleid(), user.getTasks(), user.getTests(), user.getUsersgradedetails(), user.getCreatedNotifications(), user.getNotifications());
+        return "You are successfully logged in! Your id is " + user.getId();
     }
 }

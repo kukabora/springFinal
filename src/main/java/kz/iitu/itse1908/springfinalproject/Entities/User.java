@@ -2,6 +2,7 @@ package kz.iitu.itse1908.springfinalproject.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.minidev.json.annotate.JsonIgnore;
+import org.springframework.cache.annotation.Cacheable;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -47,8 +48,8 @@ public class User {
     @OneToMany(mappedBy = "assessorid")
     private Set<Assesment> assesments = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "userid")
-    private Set<Usersgradedetail> usersgradedetails = new LinkedHashSet<>();
+    @OneToOne(mappedBy = "userid")
+    private Usersgradedetail usersgradedetails;
 
     @OneToMany(mappedBy = "creatorid")
     private Set<Notification> createdNotifications = new LinkedHashSet<>();
@@ -136,11 +137,11 @@ public class User {
         this.assesments = assesments;
     }
 
-    public Set<Usersgradedetail> getUsersgradedetails() {
+    public Usersgradedetail getUsersgradedetails() {
         return usersgradedetails;
     }
 
-    public void setUsersgradedetails(Set<Usersgradedetail> usersgradedetails) {
+    public void setUsersgradedetails(Usersgradedetail usersgradedetails) {
         this.usersgradedetails = usersgradedetails;
     }
 

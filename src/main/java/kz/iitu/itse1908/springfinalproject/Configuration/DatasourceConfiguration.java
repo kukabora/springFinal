@@ -26,18 +26,15 @@ public class DatasourceConfiguration {
     @Bean
     public DataSource dataSource() {
         Properties props = new Properties();
-
         props.setProperty("dataSourceClassName", "org.postgresql.ds.PGSimpleDataSource");
         props.setProperty("dataSource.user", "superuser");
         props.setProperty("dataSource.password", "46452020");
         props.setProperty("dataSource.databaseName", "variant2_lee");
         props.put("dataSource.logWriter", new PrintWriter(System.out));
-
         HikariConfig config = new HikariConfig(props);
         HikariDataSource dataSource = new HikariDataSource(config);
-
         return ProxyDataSourceBuilder.create(dataSource)
-                .name("Batch-Insert-Logger")
+                .name("custom-batchQueries-logger")
                 .asJson().countQuery().logQueryToSysOut().build();
 
     }
