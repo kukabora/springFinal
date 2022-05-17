@@ -36,4 +36,5 @@ public class GroupService {
     public Group findGroupByName(String name) { return groupRepository.findGroupByName(name); }
 
     public Group findGroupById(int id) { return groupRepository.findGroupById(id); }
+
 }

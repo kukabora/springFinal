@@ -32,4 +32,6 @@ public class TestQuestionService {
         testquestionRepository.saveAll(testquestions);
     }
 
+    public Testquestion findById(int id ){return testquestionRepository.findTestquestionById(id);}
+
 }

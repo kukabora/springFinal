@@ -31,4 +31,6 @@ public class AssessmentService {
         assesmentRepository.saveAll(assesments);
     }
 
+    public Assesment findById(int id) {return assesmentRepository.findAssesmentById(id);}
+
 }

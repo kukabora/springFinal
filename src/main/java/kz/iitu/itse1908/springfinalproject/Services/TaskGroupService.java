@@ -33,4 +33,5 @@ public class TaskGroupService {
         taskGroupRepository.saveAll(taskGroups);
     }
 
+    public TaskGroup findById(int id) {return  taskGroupRepository.findTaskGroupById(id);}
 }

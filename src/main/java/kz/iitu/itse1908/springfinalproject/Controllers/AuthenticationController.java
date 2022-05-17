@@ -1,8 +1,6 @@
 package kz.iitu.itse1908.springfinalproject.Controllers;
 
 import kz.iitu.itse1908.springfinalproject.Entities.User;
-import kz.iitu.itse1908.springfinalproject.Repositories.GroupRepository;
-import kz.iitu.itse1908.springfinalproject.Repositories.RoleRepository;
 import kz.iitu.itse1908.springfinalproject.Security.JwtProvider;
 import kz.iitu.itse1908.springfinalproject.Security.Requests.AuthRequest;
 import kz.iitu.itse1908.springfinalproject.Security.Requests.RegistrationRequest;
@@ -10,17 +8,11 @@ import kz.iitu.itse1908.springfinalproject.Security.Responses.AuthResponse;
 import kz.iitu.itse1908.springfinalproject.Security.UserAuthenticationService;
 import kz.iitu.itse1908.springfinalproject.Services.GroupService;
 import kz.iitu.itse1908.springfinalproject.Services.RoleService;
-import kz.iitu.itse1908.springfinalproject.UserInfoResponse;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 
 import static kz.iitu.itse1908.springfinalproject.Security.JwtFilter.AUTHORIZATION;
 
@@ -69,7 +61,6 @@ public class AuthenticationController {
         String token = userRequest.getHeader(AUTHORIZATION).substring(7);
         String userLogin = jwtProvider.getLoginFromToken(token);
         User user = userService.findByLogin(userLogin);
-        UserInfoResponse userDetailedDescription = new UserInfoResponse(user, user.getGroupid(), user.getRoleid(), user.getTasks(), user.getTests(), user.getUsersgradedetails(), user.getCreatedNotifications(), user.getNotifications());
         return "You are successfully logged in! Your id is " + user.getId();
     }
 }

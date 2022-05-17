@@ -33,4 +33,6 @@ public class TaskService {
         taskRepository.saveAll(tasks);
     }
 
+    public Task findById(int id){return taskRepository.findTaskById(id);}
+
 }

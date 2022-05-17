@@ -1,5 +1,7 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Testquestion {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "testid", nullable = false)
+    @RestResource(path = "testid", rel="testid")
     private Test testid;
 
     @Column(name = "questiontext", nullable = false)

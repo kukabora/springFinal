@@ -33,4 +33,6 @@ public class RequestLogService {
     public void saveAll(Iterable<RequestsLog> requestsLogs){
         requestsLogRepository.saveAll(requestsLogs);
     }
+
+    public RequestsLog findById(int id) {return requestsLogRepository.findRequestsLogById(id);}
 }

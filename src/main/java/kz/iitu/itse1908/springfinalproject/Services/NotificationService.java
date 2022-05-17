@@ -33,4 +33,5 @@ public class NotificationService {
         notificationRepository.saveAll(notifications);
     }
 
+    public Notification findById(int id){return notificationRepository.findNotificationById(id);}
 }

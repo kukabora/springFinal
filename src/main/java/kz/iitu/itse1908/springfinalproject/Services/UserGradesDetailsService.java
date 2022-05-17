@@ -31,4 +31,10 @@ public class UserGradesDetailsService {
         usersgradedetailRepository.saveAll(usersgradedetails);
     }
 
+    public Usersgradedetail getUserGradesByUserId(int userId){
+        return usersgradedetailRepository.getUsersgradedetailByUserid(userId);
+    }
+
+    public Usersgradedetail findById(int id) {return usersgradedetailRepository.findUsersgradedetailById(id);}
+
 }

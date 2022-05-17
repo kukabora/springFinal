@@ -8,10 +8,9 @@ import kz.iitu.itse1908.springfinalproject.Repositories.UsersgradedetailReposito
 import kz.iitu.itse1908.springfinalproject.Services.UserGradesDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
@@ -34,6 +33,33 @@ public class UserGradesController {
     public List<Usersgradedetail> getAllUsersGradeDetails(){
         List<Usersgradedetail> usersgradedetails = (List<Usersgradedetail>) userGradesDetailsService.getAll();
         return usersgradedetails;
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    String delete(@RequestBody Usersgradedetail usersgradedetail) {
+        userGradesDetailsService.delete(usersgradedetail);
+        return "Users grade details successfully deleted!";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    String create(@RequestBody Usersgradedetail usersgradedetail) {
+        userGradesDetailsService.insert(usersgradedetail);
+        return "Users grade details  succesfully created!";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    String update(@RequestBody Usersgradedetail usersgradedetail) {
+        userGradesDetailsService.insert(usersgradedetail);
+        return "Users grade details  succesfully updated!";
     }
 
 }

@@ -33,4 +33,6 @@ public class TestService {
         testRepository.saveAll(tests);
     }
 
+    public Test findById(int id) {return testRepository.findTestById(id);}
+
 }

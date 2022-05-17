@@ -4,4 +4,9 @@ import kz.iitu.itse1908.springfinalproject.Entities.Usersgradedetail;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UsersgradedetailRepository extends CrudRepository<Usersgradedetail, Integer> {
+
+    Usersgradedetail getUsersgradedetailByUserid(int userId);
+
+    Usersgradedetail  findUsersgradedetailById(int id);
+
 }

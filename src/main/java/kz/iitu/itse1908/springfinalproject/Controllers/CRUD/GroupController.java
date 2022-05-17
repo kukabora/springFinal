@@ -34,4 +34,31 @@ public class GroupController {
         return (List<Group>) groupService.getAll();
     }
 
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    String delete(@RequestBody Group group) {
+        groupService.deleteGroup(group);
+        return "Group has been successfully deleted!";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    String create(@RequestBody Group group) {
+        groupService.insertNewGroup(group);
+        return "Group succesfully created!";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    String update(@RequestBody Group group) {
+        groupService.insertNewGroup(group);
+        return "Group succesfully updated!";
+    }
+
 }
