@@ -1,0 +1,5 @@
+fname, lname, email, password, roleId, groupId
+1,1,1,1,2,1
+2,2,2,2,2,2
+3,3,3,3,2,3
+4,4,4,4,2,4
