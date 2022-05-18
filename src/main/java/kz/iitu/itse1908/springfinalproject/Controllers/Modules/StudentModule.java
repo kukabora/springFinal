@@ -4,6 +4,7 @@ package kz.iitu.itse1908.springfinalproject.Controllers.Modules;
 import kz.iitu.itse1908.springfinalproject.Controllers.CutomResponses.RoutesMappingResponse;
 import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Entities.Usersgradedetail;
+import kz.iitu.itse1908.springfinalproject.Security.CustomUserDetails;
 import kz.iitu.itse1908.springfinalproject.Security.JwtProvider;
 import kz.iitu.itse1908.springfinalproject.Services.AssessmentService;
 import kz.iitu.itse1908.springfinalproject.Services.GroupService;
@@ -11,6 +12,7 @@ import kz.iitu.itse1908.springfinalproject.Services.UserGradesDetailsService;
 import kz.iitu.itse1908.springfinalproject.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -51,9 +53,11 @@ public class StudentModule {
     RoutesMappingResponse home(HttpServletRequest request) {
         String baseUrl =
                 ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + request.getServletPath();
-        String token = request.getHeader(AUTHORIZATION).substring(7);
-        String userLogin = jwtProvider.getLoginFromToken(token);
-        User user = userService.findUserByEmail(userLogin);
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.
+                getContext().
+                getAuthentication().
+                getPrincipal();
+        User user = userService.findUserByEmail(principal.getUsername());
         String message = "Welcome, " +user.getFname() + " " + user.getLname() + "!";
         HashMap<String, String> availableRoutes = new HashMap<String, String>();
         availableRoutes.put("Your grades details", baseUrl + "myGrades");
@@ -68,11 +72,12 @@ public class StudentModule {
     @ResponseBody
     @Transactional
     Usersgradedetail myGrades(HttpServletRequest request) {
-        String token = request.getHeader(AUTHORIZATION).substring(7);
-        String userLogin = jwtProvider.getLoginFromToken(token);
-        User user = userService.findUserByEmail(userLogin);
-        String message = "Welcome, " +user.getFname() + " " + user.getLname() + "!";
-        HashMap<String, String> availableRoutes = new HashMap<String, String>();
-        return userGradesDetailsService.getUserGradesByUserId(user.getId());
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.
+                getContext().
+                getAuthentication().
+                getPrincipal();
+        User user = userService.findUserByEmail(principal.getUsername());
+        Usersgradedetail currentUsersGrades = userGradesDetailsService.getUserGradesByUserId(user);
+        return currentUsersGrades;
     }
 }

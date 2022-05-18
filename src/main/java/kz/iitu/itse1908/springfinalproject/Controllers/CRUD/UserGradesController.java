@@ -3,12 +3,11 @@ package kz.iitu.itse1908.springfinalproject.Controllers.CRUD;
 
 import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Entities.Usersgradedetail;
-import kz.iitu.itse1908.springfinalproject.Repositories.UserRepository;
-import kz.iitu.itse1908.springfinalproject.Repositories.UsersgradedetailRepository;
 import kz.iitu.itse1908.springfinalproject.Services.UserGradesDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import kz.iitu.itse1908.springfinalproject.Services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -23,8 +22,11 @@ public class UserGradesController {
     final
     UserGradesDetailsService userGradesDetailsService;
 
-    public UserGradesController(UserGradesDetailsService userGradesDetailsService) {
+    final UserService userService;
+
+    public UserGradesController(UserGradesDetailsService userGradesDetailsService, UserService userService) {
         this.userGradesDetailsService = userGradesDetailsService;
+        this.userService = userService;
     }
 
 
@@ -61,5 +63,7 @@ public class UserGradesController {
         userGradesDetailsService.insert(usersgradedetail);
         return "Users grade details  succesfully updated!";
     }
+
+
 
 }
