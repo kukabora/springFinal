@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({"tasks", "tests", "assesments", "createdNotifications", "notifications", "usersgradedetails"})
+@JsonIgnoreProperties({"tasks", "tests", "assesments", "createdNotifications", "notifications", "usersgradedetails", "version"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -56,6 +56,18 @@ public class User {
 
     @OneToMany(mappedBy = "recieverid")
     private Set<Notification> notifications = new LinkedHashSet<>();
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;

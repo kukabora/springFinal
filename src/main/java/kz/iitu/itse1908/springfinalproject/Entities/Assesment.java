@@ -1,9 +1,12 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "assesments")
+@JsonIgnoreProperties("VERSION")
 public class Assesment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +33,18 @@ public class Assesment {
     @Lob
     @Column(name = "\"assessmentPath\"")
     private String assessmentPath;
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;

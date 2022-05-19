@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tests")
-@JsonIgnoreProperties({"testquestions", "tasks"})
+@JsonIgnoreProperties({"testquestions", "tasks", "version"})
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,18 @@ public class Test {
 
     @OneToMany(mappedBy = "testid")
     private Set<Testquestion> testquestions = new LinkedHashSet<>();
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;

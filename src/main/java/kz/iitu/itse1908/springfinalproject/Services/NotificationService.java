@@ -4,14 +4,31 @@ import kz.iitu.itse1908.springfinalproject.Entities.Group;
 import kz.iitu.itse1908.springfinalproject.Entities.Notification;
 import kz.iitu.itse1908.springfinalproject.Repositories.GroupRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.NotificationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Service
 public class NotificationService {
 
     final
     NotificationRepository notificationRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(AssessmentService.class);
+
+    @PreDestroy
+    public void preDestroy() {
+        logger.info("Service " + this.getClass().getSimpleName() + " is destroyed");
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        logger.info("Service " + this.getClass().getSimpleName() + " is initialized");
+    }
 
     public NotificationService(NotificationRepository notificationRepository) {
         this.notificationRepository = notificationRepository;

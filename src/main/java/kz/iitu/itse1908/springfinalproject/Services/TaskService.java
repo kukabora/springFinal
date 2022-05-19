@@ -5,14 +5,31 @@ import kz.iitu.itse1908.springfinalproject.Entities.TaskGroup;
 import kz.iitu.itse1908.springfinalproject.Entities.Test;
 import kz.iitu.itse1908.springfinalproject.Repositories.TaskGroupRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.TaskRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Service
 public class TaskService {
 
     final
     TaskRepository taskRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(AssessmentService.class);
+
+    @PreDestroy
+    public void preDestroy() {
+        logger.info("Service " + this.getClass().getSimpleName() + " is destroyed");
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        logger.info("Service " + this.getClass().getSimpleName() + " is initialized");
+    }
 
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;

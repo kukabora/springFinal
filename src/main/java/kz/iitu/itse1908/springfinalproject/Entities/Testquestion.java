@@ -1,11 +1,13 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "testquestions")
+@JsonIgnoreProperties("version")
 public class Testquestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +33,18 @@ public class Testquestion {
 
     @Column(name = "correctanswer", nullable = false)
     private String correctanswer;
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;

@@ -3,9 +3,13 @@ package kz.iitu.itse1908.springfinalproject.Services;
 import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Entities.Usersgradedetail;
 import kz.iitu.itse1908.springfinalproject.Repositories.UsersgradedetailRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -13,6 +17,18 @@ public class UserGradesDetailsService {
 
     final
     UsersgradedetailRepository usersgradedetailRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(AssessmentService.class);
+
+    @PreDestroy
+    public void preDestroy() {
+        logger.info("Service " + this.getClass().getSimpleName() + " is destroyed");
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        logger.info("Service " + this.getClass().getSimpleName() + " is initialized");
+    }
 
     final
     UserService userService;

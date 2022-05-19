@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "task_groups")
+@JsonIgnoreProperties("version")
 public class TaskGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +20,18 @@ public class TaskGroup {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "taskid", nullable = false)
     private Task taskid;
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;

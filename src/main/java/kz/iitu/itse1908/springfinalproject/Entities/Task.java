@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tasks")
+@JsonIgnoreProperties("version")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +31,18 @@ public class Task {
 
     @OneToMany(mappedBy = "taskid", fetch = FetchType.EAGER)
     private Set<TaskGroup> taskGroups = new LinkedHashSet<>();
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;

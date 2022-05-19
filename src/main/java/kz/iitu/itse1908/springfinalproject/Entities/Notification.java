@@ -1,9 +1,12 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "notifications")
+@JsonIgnoreProperties("version")
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +20,18 @@ public class Notification {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recieverid", nullable = false)
     private User recieverid;
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     @Column(name = "text", nullable = false)
     private String text;

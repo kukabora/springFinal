@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "groups")
-@JsonIgnoreProperties({"users", "taskGroups"})
+@JsonIgnoreProperties({"users", "taskGroups", "version"})
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,18 @@ public class Group {
     @OneToMany(mappedBy = "groupid")
 //    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<User> users = new LinkedHashSet<>();
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;

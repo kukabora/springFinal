@@ -1,10 +1,13 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "requests_log")
+@JsonIgnoreProperties("version")
 public class RequestsLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +28,18 @@ public class RequestsLog {
 
     @Column(name = "requestmethod", nullable = false)
     private String requestmethod;
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;

@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@JsonIgnoreProperties("users")
+@JsonIgnoreProperties({"users", "version"})
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,18 @@ public class Role {
 
     @OneToMany(mappedBy = "roleid")
     private Set<User> users = new LinkedHashSet<>();
+
+    @Version
+    @Column(name = "version")
+    private long version;
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
 
     public Integer getId() {
         return id;
