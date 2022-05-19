@@ -8,14 +8,18 @@ import kz.iitu.itse1908.springfinalproject.Controllers.CutomResponses.TrimmedTes
 import kz.iitu.itse1908.springfinalproject.Entities.*;
 import kz.iitu.itse1908.springfinalproject.Security.CustomUserDetails;
 import kz.iitu.itse1908.springfinalproject.Services.*;
+import kz.iitu.itse1908.springfinalproject.Utils.FileExtensionUtil;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -226,13 +230,62 @@ public class StudentModule {
                 }
             });
             Assesment newAssesment = new Assesment();
-            newAssesment.setAssesmentgrade(Float.valueOf(rightAnswered.get() * 100 / totalQuestions.get()));
+            newAssesment.setAssesmentgrade(Double.valueOf(rightAnswered.get() * 100 / totalQuestions.get()));
             newAssesment.setAssessorid(user);
             newAssesment.setGraded(true);
             newAssesment.setTaskid(currentTask);
             newAssesment.setTestresult(rightAnswered.get());
             assessmentService.insertNewAssesment(newAssesment);
             return "YOU HAVE GOT " + rightAnswered.get() + "/" + totalQuestions.get() + " ANSWERS RIGHT!";
+
+        }
+        return "THERE IS NO TEST WITH SUCH AN ID";
+    }
+
+    @RequestMapping(value = "/uploadAssessment/{taskId}", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    String uploadAssessment(@PathVariable Integer taskId, @RequestParam("file") MultipartFile file, ModelMap modelMap) {
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.
+                getContext().
+                getAuthentication().
+                getPrincipal();
+        User user = userService.findUserByEmail(principal.getUsername());
+        String extension = FileExtensionUtil.getExtensionByStringHandling(file.getOriginalFilename()).get();
+        Group group = user.getGroupid();
+        if (taskService.existsById(taskId)){
+            Task currentTask = taskService.findById(taskId);
+            if (assessmentService.checkIfAlreadyAssessed(user, currentTask))
+                return "YOU HAVE ALREADY UPLOADED YOUR ASSESSMENT FOR THIS TASK!";
+            Assesment newAssesment = new Assesment();
+            String assessmentUrl = group.getName()
+                    + "/"
+                    + currentTask.getTaskDescription().replace(" ", "_")
+                    + "("
+                    + currentTask.getGraderid()
+                    + ")/"
+                    + user.getFname()
+                    + "_"
+                    + user.getLname()
+                    + "_("
+                    + user.getId()
+                    + ")."
+                    + extension;
+            try {
+                file.transferTo( new File("temp/assessments/"
+                        + assessmentUrl));
+            } catch (Exception e) {
+                return e.getMessage();
+            }
+            newAssesment.setAssesmentgrade(Double.valueOf(0));
+            newAssesment.setAssessorid(user);
+            newAssesment.setGraded(false);
+            newAssesment.setTaskid(currentTask);
+            newAssesment.setTestresult(null);
+            newAssesment.setAssessmentPath(assessmentUrl);
+            assessmentService.insertNewAssesment(newAssesment);
+            return "YOU HAVE UPLOADED A FILE!";
 
         }
         return "THERE IS NO TEST WITH SUCH AN ID";

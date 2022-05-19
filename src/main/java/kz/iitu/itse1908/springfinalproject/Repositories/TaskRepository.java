@@ -12,4 +12,6 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
     Iterable<Task> findAllById(Iterable<Integer> ids);
 
     Task findByTestid(Test test);
+
+    boolean existsById(int id);
 }

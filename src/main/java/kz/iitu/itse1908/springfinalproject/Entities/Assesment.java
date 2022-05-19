@@ -18,7 +18,7 @@ public class Assesment {
     private Integer testresult;
 
     @Column(name = "assesmentgrade", nullable = false)
-    private Float assesmentgrade;
+    private Double assesmentgrade;
 
     @Column(name = "graded")
     private Boolean graded;
@@ -26,6 +26,10 @@ public class Assesment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "assessorid", nullable = false)
     private User assessorid;
+
+    @Lob
+    @Column(name = "\"assessmentPath\"")
+    private String assessmentPath;
 
     public Integer getId() {
         return id;
@@ -51,11 +55,11 @@ public class Assesment {
         this.testresult = testresult;
     }
 
-    public Float getAssesmentgrade() {
+    public Double getAssesmentgrade() {
         return assesmentgrade;
     }
 
-    public void setAssesmentgrade(Float assesmentgrade) {
+    public void setAssesmentgrade(Double assesmentgrade) {
         this.assesmentgrade = assesmentgrade;
     }
 
@@ -73,6 +77,14 @@ public class Assesment {
 
     public void setAssessorid(User assessorid) {
         this.assessorid = assessorid;
+    }
+
+    public String getAssessmentPath() {
+        return assessmentPath;
+    }
+
+    public void setAssessmentPath(String assessmentPath) {
+        this.assessmentPath = assessmentPath;
     }
 
 }

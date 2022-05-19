@@ -42,4 +42,6 @@ public class TaskService {
 
     public Task findByTestId(Test test){return taskRepository.findByTestid(test);}
 
+    public boolean existsById(int id){return taskRepository.existsById(id);}
+
 }
