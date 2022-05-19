@@ -31,7 +31,6 @@ public class Assesment {
     @OrderBy("id")
     private User assessorid;
 
-    @Lob
     @Column(name = "\"assessmentPath\"")
     private String assessmentPath;
 
