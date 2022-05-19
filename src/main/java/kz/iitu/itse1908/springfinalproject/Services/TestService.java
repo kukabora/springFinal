@@ -35,4 +35,6 @@ public class TestService {
 
     public Test findById(int id) {return testRepository.findTestById(id);}
 
+    public boolean existsById(int id){return testRepository.existsById(id);}
+
 }

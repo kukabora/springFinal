@@ -18,7 +18,7 @@ public class Assesment {
     private Integer testresult;
 
     @Column(name = "assesmentgrade", nullable = false)
-    private Integer assesmentgrade;
+    private Float assesmentgrade;
 
     @Column(name = "graded")
     private Boolean graded;
@@ -51,11 +51,11 @@ public class Assesment {
         this.testresult = testresult;
     }
 
-    public Integer getAssesmentgrade() {
+    public Float getAssesmentgrade() {
         return assesmentgrade;
     }
 
-    public void setAssesmentgrade(Integer assesmentgrade) {
+    public void setAssesmentgrade(Float assesmentgrade) {
         this.assesmentgrade = assesmentgrade;
     }
 

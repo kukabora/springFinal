@@ -6,4 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TestRepository extends CrudRepository<Test, Integer> {
     Test findTestById(int id);
+
+    boolean existsById(int id);
+
+
 }

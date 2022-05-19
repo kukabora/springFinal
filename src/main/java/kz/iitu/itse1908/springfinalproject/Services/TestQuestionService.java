@@ -1,5 +1,6 @@
 package kz.iitu.itse1908.springfinalproject.Services;
 
+import kz.iitu.itse1908.springfinalproject.Entities.Test;
 import kz.iitu.itse1908.springfinalproject.Entities.Testquestion;
 import kz.iitu.itse1908.springfinalproject.Repositories.TestquestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,7 @@ public class TestQuestionService {
     }
 
     public Testquestion findById(int id ){return testquestionRepository.findTestquestionById(id);}
+
+    public Iterable<Testquestion> findAllByTestId(Test test){return testquestionRepository.getAllByTestid(test);}
 
 }

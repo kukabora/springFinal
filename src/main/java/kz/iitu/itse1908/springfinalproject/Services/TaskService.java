@@ -2,6 +2,7 @@ package kz.iitu.itse1908.springfinalproject.Services;
 
 import kz.iitu.itse1908.springfinalproject.Entities.Task;
 import kz.iitu.itse1908.springfinalproject.Entities.TaskGroup;
+import kz.iitu.itse1908.springfinalproject.Entities.Test;
 import kz.iitu.itse1908.springfinalproject.Repositories.TaskGroupRepository;
 import kz.iitu.itse1908.springfinalproject.Repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,7 @@ public class TaskService {
     }
 
     public Task findById(int id){return taskRepository.findTaskById(id);}
+
+    public Task findByTestId(Test test){return taskRepository.findByTestid(test);}
 
 }
