@@ -19,6 +19,7 @@ public class Role {
     private String name;
 
     @OneToMany(mappedBy = "roleid")
+    @OrderBy("id")
     private Set<User> users = new LinkedHashSet<>();
 
     @Version

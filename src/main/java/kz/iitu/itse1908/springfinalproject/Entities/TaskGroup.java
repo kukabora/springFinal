@@ -19,6 +19,7 @@ public class TaskGroup {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "taskid", nullable = false)
+    @OrderBy("id")
     private Task taskid;
 
     @Version

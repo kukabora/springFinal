@@ -27,6 +27,7 @@ public class Group {
     private Set<TaskGroup> taskGroups = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "groupid")
+    @OrderBy("id")
 //    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<User> users = new LinkedHashSet<>();
 

@@ -19,6 +19,7 @@ public class Notification {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "recieverid", nullable = false)
+    @OrderBy("id")
     private User recieverid;
 
     @Version

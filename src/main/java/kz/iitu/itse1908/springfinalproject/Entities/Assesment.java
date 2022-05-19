@@ -28,6 +28,7 @@ public class Assesment {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "assessorid", nullable = false)
+    @OrderBy("id")
     private User assessorid;
 
     @Lob

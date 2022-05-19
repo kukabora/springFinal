@@ -55,6 +55,7 @@ public class User {
     private Set<Notification> createdNotifications = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "recieverid")
+    @OrderBy("id")
     private Set<Notification> notifications = new LinkedHashSet<>();
 
     @Version

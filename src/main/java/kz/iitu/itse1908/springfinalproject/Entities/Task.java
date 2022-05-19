@@ -30,6 +30,7 @@ public class Task {
     private String taskDescription;
 
     @OneToMany(mappedBy = "taskid", fetch = FetchType.EAGER)
+    @OrderBy("id")
     private Set<TaskGroup> taskGroups = new LinkedHashSet<>();
 
     @Version
