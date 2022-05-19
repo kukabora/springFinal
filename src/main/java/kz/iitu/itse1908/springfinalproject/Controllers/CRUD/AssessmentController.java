@@ -42,7 +42,7 @@ public class AssessmentController {
         return "Assessment ssuccessfully deleted!";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST,
+    @RequestMapping(value = "/create", method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional

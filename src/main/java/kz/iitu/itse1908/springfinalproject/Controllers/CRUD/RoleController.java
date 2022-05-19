@@ -40,7 +40,7 @@ public class RoleController {
         return "Role successfully deleted!";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST,
+    @RequestMapping(value = "/create", method = RequestMethod.PUT,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional
