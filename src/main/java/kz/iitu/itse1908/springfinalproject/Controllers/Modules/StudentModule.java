@@ -2,15 +2,10 @@ package kz.iitu.itse1908.springfinalproject.Controllers.Modules;
 
 
 import kz.iitu.itse1908.springfinalproject.Controllers.CutomResponses.RoutesMappingResponse;
-import kz.iitu.itse1908.springfinalproject.Entities.User;
-import kz.iitu.itse1908.springfinalproject.Entities.Usersgradedetail;
+import kz.iitu.itse1908.springfinalproject.Entities.*;
 import kz.iitu.itse1908.springfinalproject.Security.CustomUserDetails;
 import kz.iitu.itse1908.springfinalproject.Security.JwtProvider;
-import kz.iitu.itse1908.springfinalproject.Services.AssessmentService;
-import kz.iitu.itse1908.springfinalproject.Services.GroupService;
-import kz.iitu.itse1908.springfinalproject.Services.UserGradesDetailsService;
-import kz.iitu.itse1908.springfinalproject.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import kz.iitu.itse1908.springfinalproject.Services.*;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +14,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
-
-import static kz.iitu.itse1908.springfinalproject.Security.JwtFilter.AUTHORIZATION;
+import java.util.List;
 
 @RestController
 @EnableWebMvc
@@ -38,12 +33,18 @@ public class StudentModule {
 
     private final UserGradesDetailsService userGradesDetailsService;
 
-    public StudentModule(AssessmentService assessmentService, JwtProvider jwtProvider, UserService userService, GroupService groupService, UserGradesDetailsService userGradesDetailsService) {
+    private final TaskService taskService;
+
+    private final TaskGroupService taskGroupService;
+
+    public StudentModule(AssessmentService assessmentService, JwtProvider jwtProvider, UserService userService, GroupService groupService, UserGradesDetailsService userGradesDetailsService, TaskService taskService, TaskGroupService taskGroupService) {
         this.assessmentService = assessmentService;
         this.jwtProvider = jwtProvider;
         this.userService = userService;
         this.groupService = groupService;
         this.userGradesDetailsService = userGradesDetailsService;
+        this.taskService = taskService;
+        this.taskGroupService = taskGroupService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET,
@@ -61,7 +62,7 @@ public class StudentModule {
         String message = "Welcome, " +user.getFname() + " " + user.getLname() + "!";
         HashMap<String, String> availableRoutes = new HashMap<String, String>();
         availableRoutes.put("Your grades details", baseUrl + "myGrades");
-        availableRoutes.put("Your assignments", baseUrl + "assignments");
+        availableRoutes.put("Your assessments", baseUrl + "assignments");
         availableRoutes.put("Tasks for your group", baseUrl + "tasks");
         RoutesMappingResponse mappingResponse = new RoutesMappingResponse(message, availableRoutes);
         return mappingResponse;
@@ -79,5 +80,39 @@ public class StudentModule {
         User user = userService.findUserByEmail(principal.getUsername());
         Usersgradedetail currentUsersGrades = userGradesDetailsService.getUserGradesByUserId(user);
         return currentUsersGrades;
+    }
+
+    @RequestMapping(value = "/tasks", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    Iterable<Task> tasks(HttpServletRequest request) {
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.
+                getContext().
+                getAuthentication().
+                getPrincipal();
+        User user = userService.findUserByEmail(principal.getUsername());
+        Group group = user.getGroupid();
+        Iterable<TaskGroup> taskGroups = taskGroupService.findTaskGroupByGroupid(group);
+        List<Integer> taskIds = new ArrayList<Integer>();
+        taskGroups.forEach(taskGroup -> {
+            taskIds.add(taskGroup.getTaskid());
+        });
+        Iterable<Task> tasks = taskService.findAllById(taskIds);
+        return tasks;
+    }
+
+    @RequestMapping(value = "/assessments", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    Iterable<Assesment> assessments(HttpServletRequest request) {
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.
+                getContext().
+                getAuthentication().
+                getPrincipal();
+        User user = userService.findUserByEmail(principal.getUsername());
+        Iterable<Assesment> assesments = assessmentService.findAllByAssessorId(user);
+        return assesments;
     }
 }

@@ -1,9 +1,12 @@
 package kz.iitu.itse1908.springfinalproject.Repositories;
 
 import kz.iitu.itse1908.springfinalproject.Entities.Task;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
 
 public interface TaskRepository extends CrudRepository<Task, Integer> {
     Task findTaskById(int id);
+
+    Iterable<Task> findAllById(Iterable<Integer> ids);
 }

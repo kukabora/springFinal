@@ -1,5 +1,6 @@
 package kz.iitu.itse1908.springfinalproject.Services;
 
+import kz.iitu.itse1908.springfinalproject.Entities.Group;
 import kz.iitu.itse1908.springfinalproject.Entities.Role;
 import kz.iitu.itse1908.springfinalproject.Entities.TaskGroup;
 import kz.iitu.itse1908.springfinalproject.Repositories.TaskGroupRepository;
@@ -34,4 +35,6 @@ public class TaskGroupService {
     }
 
     public TaskGroup findById(int id) {return  taskGroupRepository.findTaskGroupById(id);}
+
+    public Iterable<TaskGroup> findTaskGroupByGroupid(Group group){return taskGroupRepository.findAllByGroupid(group);}
 }

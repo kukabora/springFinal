@@ -1,6 +1,7 @@
 package kz.iitu.itse1908.springfinalproject.Services;
 
 import kz.iitu.itse1908.springfinalproject.Entities.Assesment;
+import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Repositories.AssesmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,4 +34,6 @@ public class AssessmentService {
 
     public Assesment findById(int id) {return assesmentRepository.findAssesmentById(id);}
 
+
+    public Iterable<Assesment> findAllByAssessorId(User user){return assesmentRepository.findAssesmentsByAssessorid(user);}
 }

@@ -1,9 +1,12 @@
 package kz.iitu.itse1908.springfinalproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "usersgradedetails")
+@JsonIgnoreProperties("userid")
 public class Usersgradedetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

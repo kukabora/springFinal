@@ -33,6 +33,10 @@ public class TaskService {
         taskRepository.saveAll(tasks);
     }
 
+    public Iterable<Task> findAllById(Iterable<Integer> ids){
+        return taskRepository.findAllById(ids);
+    }
+
     public Task findById(int id){return taskRepository.findTaskById(id);}
 
 }
