@@ -62,8 +62,9 @@ public class StudentModule {
         String message = "Welcome, " +user.getFname() + " " + user.getLname() + "!";
         HashMap<String, String> availableRoutes = new HashMap<String, String>();
         availableRoutes.put("Your grades details", baseUrl + "myGrades");
-        availableRoutes.put("Your assessments", baseUrl + "assignments");
+        availableRoutes.put("Your assessments", baseUrl + "assessments");
         availableRoutes.put("Tasks for your group", baseUrl + "tasks");
+        availableRoutes.put("Your unfinished tasks", baseUrl + "unfinishedTasks");
         RoutesMappingResponse mappingResponse = new RoutesMappingResponse(message, availableRoutes);
         return mappingResponse;
     }
@@ -114,5 +115,30 @@ public class StudentModule {
         User user = userService.findUserByEmail(principal.getUsername());
         Iterable<Assesment> assesments = assessmentService.findAllByAssessorId(user);
         return assesments;
+    }
+
+    @RequestMapping(value = "/unfinishedTasks", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    Iterable<Task> unfinishedTasks(HttpServletRequest request) {
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.
+                getContext().
+                getAuthentication().
+                getPrincipal();
+        User user = userService.findUserByEmail(principal.getUsername());
+        Group group = user.getGroupid();
+        Iterable<TaskGroup> taskGroups = taskGroupService.findTaskGroupByGroupid(group);
+        List<Integer> taskIds = new ArrayList<Integer>();
+        taskGroups.forEach(taskGroup -> {
+            taskIds.add(taskGroup.getTaskid());
+        });
+        List<Task> tasks = (List<Task>) taskService.findAllById(taskIds);
+        for (int i = 0;i<tasks.size();i++){
+            if (assessmentService.checkIfAlreadyAssessed(user, tasks.get(i))){
+                tasks.remove(i);
+            }
+        }
+        return tasks;
     }
 }

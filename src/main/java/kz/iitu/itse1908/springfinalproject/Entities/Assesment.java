@@ -11,8 +11,8 @@ public class Assesment {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "testid", nullable = false)
-    private Test testid;
+    @JoinColumn(name = "taskid", nullable = false)
+    private Task taskid;
 
     @Column(name = "testresult")
     private Integer testresult;
@@ -35,20 +35,20 @@ public class Assesment {
         this.id = id;
     }
 
-    public Test getTestid() {
-        return testid;
+    public Task getTaskid() {
+        return taskid;
     }
 
-    public void setTestid(Test testid) {
-        this.testid = testid;
+    public void setTaskid(Task taskid) {
+        this.taskid = taskid;
     }
 
     public Integer getTestresult() {
         return testresult;
     }
 
-    public void setTestreult(Integer testreult) {
-        this.testresult = testreult;
+    public void setTestresult(Integer testresult) {
+        this.testresult = testresult;
     }
 
     public Integer getAssesmentgrade() {

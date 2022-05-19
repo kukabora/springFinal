@@ -1,6 +1,7 @@
 package kz.iitu.itse1908.springfinalproject.Services;
 
 import kz.iitu.itse1908.springfinalproject.Entities.Assesment;
+import kz.iitu.itse1908.springfinalproject.Entities.Task;
 import kz.iitu.itse1908.springfinalproject.Entities.User;
 import kz.iitu.itse1908.springfinalproject.Repositories.AssesmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +37,6 @@ public class AssessmentService {
 
 
     public Iterable<Assesment> findAllByAssessorId(User user){return assesmentRepository.findAssesmentsByAssessorid(user);}
+
+    public boolean checkIfAlreadyAssessed(User user, Task task){ return assesmentRepository.existsByAssessoridAndTaskid(user, task);}
 }

@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tests")
-@JsonIgnoreProperties({"testquestions", "assesments", "tasks"})
+@JsonIgnoreProperties({"testquestions", "tasks"})
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,6 @@ public class Test {
 
     @OneToMany(mappedBy = "testid")
     private Set<Task> tasks = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "testid")
-    private Set<Assesment> assesments = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "testid")
     private Set<Testquestion> testquestions = new LinkedHashSet<>();
@@ -52,13 +49,6 @@ public class Test {
         this.tasks = tasks;
     }
 
-    public Set<Assesment> getAssesments() {
-        return assesments;
-    }
-
-    public void setAssesments(Set<Assesment> assesments) {
-        this.assesments = assesments;
-    }
 
     public Set<Testquestion> getTestquestions() {
         return testquestions;
