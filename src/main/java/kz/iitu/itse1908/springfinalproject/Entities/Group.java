@@ -22,12 +22,11 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "groupid")
+    @OneToMany(mappedBy = "groupid") // There should be many to many
 //    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<TaskGroup> taskGroups = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "groupid")
-    @OrderBy("id")
 //    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<User> users = new LinkedHashSet<>();
 
@@ -35,13 +34,6 @@ public class Group {
     @Column(name = "version")
     private long version;
 
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
 
     public Integer getId() {
         return id;

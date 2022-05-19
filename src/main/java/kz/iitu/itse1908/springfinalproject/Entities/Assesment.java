@@ -39,6 +39,11 @@ public class Assesment {
     @Column(name = "version")
     private long version;
 
+    @Transient
+    public boolean isNew() {
+        return id == null;
+    }
+
     public long getVersion() {
         return version;
     }

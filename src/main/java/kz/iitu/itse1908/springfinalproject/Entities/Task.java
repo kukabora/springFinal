@@ -29,13 +29,18 @@ public class Task {
     @Column(name = "taskDescription", nullable = false)
     private String taskDescription;
 
-    @OneToMany(mappedBy = "taskid", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "taskid", fetch = FetchType.EAGER) // There should be many to many
     @OrderBy("id")
     private Set<TaskGroup> taskGroups = new LinkedHashSet<>();
 
     @Version
     @Column(name = "version")
     private long version;
+
+    @Transient
+    public boolean isNew() {
+        return id == null;
+    }
 
     public long getVersion() {
         return version;
