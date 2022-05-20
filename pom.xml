@@ -165,7 +165,18 @@
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
         </dependency>
-
+        <!--    WebSocket dependencies    -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>5.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>5.2.2.RELEASE</version>
+        </dependency>
+        <!--    Kafka dependencies    -->
     </dependencies>
     <artifactId>SpringFinalProject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
