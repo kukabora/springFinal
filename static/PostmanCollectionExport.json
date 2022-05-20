@@ -1,0 +1,1759 @@
+{
+	"info": {
+		"_postman_id": "882dbd00-3ab9-4938-a3cb-abb5a06c2e44",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10860477"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin1\",\n    \"password\": \"admin\",\n    \"fname\": \"admin1\",\n    \"lname\": \"admin2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/auth/checkUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"checkUser"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Modules",
+			"item": [
+				{
+					"name": "AdminModule",
+					"item": [
+						{
+							"name": "uploadNewStudents",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/ai/Downloads/response.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/adminModule/uploadNewStudents",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"adminModule",
+										"uploadNewStudents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getNewStudentsTemplate",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/adminModule/getNewStudentsTemplate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"adminModule",
+										"getNewStudentsTemplate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "StaffModule",
+					"item": [
+						{
+							"name": "home",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/staffModule/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"staffModule",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createNewTask",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"graderid\": {\n    \"id\": 1\n  },\n  \"id\": 500,\n  \"taskDescription\": \"string\",\n  \"taskGroups\": [],\n  \"tasktype\": \"string\",\n  \"testid\": {\n      \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/staffModule/createNewTask",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"staffModule",
+										"createNewTask"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "assignTask",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"taskId\": 1,\n    \"groupIds\": [1, 2, 3, 4]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/staffModule/assignTask",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"staffModule",
+										"assignTask"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "gradeAssessments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/staffModule/gradeAssessments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"staffModule",
+										"gradeAssessments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAssesment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"path\": \"UNSORTED/Homework_on_Mathematical_analysis(2)/admin_admin_(2).png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/staffModule/getAssesment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"staffModule",
+										"getAssesment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "fillTestWithQuestions",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"testId\": 1,\n    \"questions\": [\n        {\n            \"answer1\": \"string\",\n            \"answer2\": \"string\",\n            \"answer3\": \"string\",\n            \"correctanswer\": \"string\",\n            \"id\": null,\n            \"questiontext\": \"string\",\n            \"testid\": {\n                \"id\": 1\n                }\n            },\n            {\n            \"answer1\": \"string\",\n            \"answer2\": \"string\",\n            \"answer3\": \"string\",\n            \"correctanswer\": \"string\",\n            \"id\": null,\n            \"questiontext\": \"string\",\n            \"testid\": {\n                \"id\": 1\n                }\n            }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/staffModule/fillTestWithQuestions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"staffModule",
+										"fillTestWithQuestions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createNewTest",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n      \"id\": 2\n  },\n  \"id\": 255\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/staffModule/createNewTest",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"staffModule",
+										"createNewTest"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "StudentModule",
+					"item": [
+						{
+							"name": "home",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/studentModule/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"studentModule",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "myGrades",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/studentModule/myGrades",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"studentModule",
+										"myGrades"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tasks",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/studentModule/tasks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"studentModule",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "assessments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/studentModule/assessments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"studentModule",
+										"assessments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unfinishedTasks",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/studentModule/unfinishedTasks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"studentModule",
+										"unfinishedTasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "passTest",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/studentModule/passTest/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"studentModule",
+										"passTest",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "passTest[POST]",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"answers\": {\n        \"2\": \"@Scope\",\n        \"3\": \"Springa\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/studentModule/passTest/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"studentModule",
+										"passTest",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "uploadAssessment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/home/ai/Downloads/1.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/studentModule/uploadAssessment/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"studentModule",
+										"uploadAssessment",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Messaging",
+					"item": [
+						{
+							"name": "sendMessage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n    \"id\": 1\n    },\n  \"id\": null,\n  \"recieverid\": {\n    \"id\": 2\n  },\n  \"text\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/messaging/sendMessage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"messaging",
+										"sendMessage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getMessage",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n    \"id\": 1\n    },\n  \"id\": null,\n  \"recieverid\": {\n    \"id\": 2\n  },\n  \"text\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/messaging/getMessage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"messaging",
+										"getMessage"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "testingHttpRequest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "HEAD",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/testingController/getHttpHeader",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testingController",
+								"getHttpHeader"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "testingHttpRequest Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "OPTIONS",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/testingController/testHttpRequest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testingController",
+								"testHttpRequest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CRUD",
+			"item": [
+				{
+					"name": "Group",
+					"item": [
+						{
+							"name": "groups/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/groups/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"groups",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "groups/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 13,\n  \"name\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/groups/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"groups",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "groups/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 15,\n  \"name\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/groups/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"groups",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "groups/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 13,\n  \"name\": \"stringstring\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/groups/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"groups",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TestsQuestions",
+					"item": [
+						{
+							"name": "testsQuestions/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/testQuestions/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"testQuestions",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "testsQuestions/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"answer1\": \"string\",\n  \"answer2\": \"string\",\n  \"answer3\": \"string\",\n  \"correctanswer\": \"string\",\n  \"id\": null,\n  \"questiontext\": \"string\",\n  \"testid\": {\n      \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/testQuestions/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"testQuestions",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "testsQuestions/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"answer1\": \"string\",\n  \"answer2\": \"string\",\n  \"answer3\": \"string\",\n  \"correctanswer\": \"string\",\n  \"id\": null,\n  \"questiontext\": \"string\",\n  \"testid\": {\n      \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/testQuestions/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"testQuestions",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "testsQuestions/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"answer1\": \"string\",\n  \"answer2\": \"string\",\n  \"answer3\": \"string\",\n  \"correctanswer\": \"string\",\n  \"id\": null,\n  \"questiontext\": \"string\",\n  \"testid\": {\n      \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/testQuestions/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"testQuestions",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UserGradesDetails",
+					"item": [
+						{
+							"name": "usersGrades/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/usersGrades/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"usersGrades",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "usersGrades/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"gpa\": 0,\n  \"gradedassessments\": 0,\n  \"id\": 1,\n  \"readyassessments\": 0,\n  \"userid\": {\n    \"id\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/usersGrades/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"usersGrades",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "usersGrades/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"gpa\": 0,\n  \"gradedassessments\": 0,\n  \"id\": 1,\n  \"readyassessments\": 0,\n  \"userid\": {\n    \"id\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/usersGrades/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"usersGrades",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "usersGrades/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"gpa\": 0,\n  \"gradedassessments\": 0,\n  \"id\": 1,\n  \"readyassessments\": 0,\n  \"userid\": {\n    \"id\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/usersGrades/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"usersGrades",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tests",
+					"item": [
+						{
+							"name": "tests/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/tests/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"tests",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tests/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n    \"id\": 1\n  },\n  \"id\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/tests/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"tests",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tests/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n    \"id\": 1\n  },\n  \"id\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/tests/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"tests",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tests/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n    \"id\": 1\n  },\n  \"id\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/tests/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"tests",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Notifications",
+					"item": [
+						{
+							"name": "notifications/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/notifications/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"notifications",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "notifications/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n    \"id\": 1\n    },\n  \"id\": 1,\n  \"recieverid\": {\n    \"id\": 2\n  },\n  \"text\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/notifications/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"notifications",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "notifications/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n    \"id\": 1\n    },\n  \"id\": 1,\n  \"recieverid\": {\n    \"id\": 2\n  },\n  \"text\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/notifications/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"notifications",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "notifications/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"creatorid\": {\n    \"id\": 1\n    },\n  \"id\": 1,\n  \"recieverid\": {\n    \"id\": 2\n  },\n  \"text\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/notifications/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"notifications",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Assessments",
+					"item": [
+						{
+							"name": "assesments/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/assessments/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"assessments",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "assesments/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assesmentgrade\": 0,\n  \"assessorid\": {\n    \"id\": 1\n  },\n  \"graded\": true,\n  \"id\": null,\n  \"testid\": {\n      \"id\": 1\n  },\n  \"testresult\": 0,\n  \"testreult\": 0\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/assessments/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"assessments",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "assesments/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assesmentgrade\": 0,\n  \"assessorid\": {\n    \"id\": 2\n  },\n  \"graded\": false,\n  \"id\": 14,\n  \"taskid\": {\n      \"id\": 1\n  },\n  \"assessmentPath\": \"\",\n  \"testresult\": 0,\n  \"version\": 1\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/assessments/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"assessments",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "assesments/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assesmentgrade\": 0,\n  \"assessorid\": {\n    \"id\": 1\n  },\n  \"graded\": true,\n  \"id\": null,\n  \"testid\": {\n      \"id\": 1\n  },\n  \"testresult\": 0,\n  \"testreult\": 0\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/assessments/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"assessments",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Task",
+					"item": [
+						{
+							"name": "tasks/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/tasks/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"tasks",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tasks/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"graderid\": {\n    \"id\": 1\n  },\n  \"id\": 500,\n  \"taskDescription\": \"string\",\n  \"taskGroups\": [],\n  \"tasktype\": \"string\",\n  \"testid\": {\n      \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/tasks/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"tasks",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tasks/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"graderid\": {\n    \"id\": 1\n  },\n  \"id\": 2,\n  \"taskDescription\": \"string\",\n  \"taskGroups\": [\n    {\n      \"groupid\": {\n        \"id\": 1\n      },\n      \"id\": null\n    }\n  ],\n  \"tasktype\": \"string\",\n  \"testid\": {\n      \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/tasks/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"tasks",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tasks/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"graderid\": {\n    \"id\": 1\n  },\n  \"id\": 2,\n  \"taskDescription\": \"string\",\n  \"taskGroups\": [\n    {\n      \"groupid\": {\n        \"id\": 1\n      },\n      \"id\": null\n    }\n  ],\n  \"tasktype\": \"string\",\n  \"testid\": {\n      \"id\": 1\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/tasks/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"tasks",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Roles",
+					"item": [
+						{
+							"name": "roles/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/roles/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"roles",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "roles/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": null,\n  \"name\": \"hibernat\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/roles/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"roles",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "roles/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": null,\n  \"name\": \"hibernat\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/roles/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"roles",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "roles/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/roles/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"roles",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "users/all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/crud/users/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"users",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "users/create",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"string\",\n  \"fname\": \"string\",\n  \"groupid\": {\n    \"id\": 1\n  },\n  \"id\": null,\n  \"lname\": \"string\",\n  \"password\": \"string\",\n  \"roleid\": {\n    \"id\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/users/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"users",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "users/update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"afgjiwj\",\n  \"fname\": \"string\",\n  \"groupid\": {\n    \"id\": 1\n  },\n  \"id\": 282,\n  \"lname\": \"string\",\n  \"password\": \"string\",\n  \"roleid\": {\n    \"id\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/users/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"users",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "users/delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"string\",\n  \"fname\": \"string\",\n  \"groupid\": {\n    \"id\": 1\n  },\n  \"id\": null,\n  \"lname\": \"string\",\n  \"password\": \"string\",\n  \"roleid\": {\n    \"id\": 1\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/crud/users/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"crud",
+										"users",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY1MzkzMzYwMH0.PoSgGEawjS9Rara5h1vZFhiIA6LKFMqnDn5N5WF25RWmlDkNkzh-SYEbagbokyugWxk4XWUxLw8duVG7feKYig",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
